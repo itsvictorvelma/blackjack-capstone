@@ -23,10 +23,13 @@ A text-based Python Blackjack game where the player competes against a computer 
 ## Example
 
 Your Cards: [10, 7] || Total: 17
+
 Computers First Card: 10
+
 Hit or Stand?: stand
 
 Computer Cards: [10, 6] || Computers Total: 16
+
 YOU WIN!
 
 ## Requirements
