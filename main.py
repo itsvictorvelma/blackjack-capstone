@@ -39,8 +39,8 @@ def display_hands(player_hand, computer_hand, reveal_all=False):
 def blackjack():
 
     # initial hands
-    player_cards = random.sample(cards, 2)
-    computer_cards = random.sample(cards, 2)
+    player_cards = [random.choice(cards), random.choice(cards)]
+    computer_cards = [random.choice(cards), random.choice(cards)]
 
     game_over = False
 
@@ -56,25 +56,23 @@ def blackjack():
     if check_blackjack(computer_total):
         print("\nComputer has BLACKJACK - You Lose\n")
         display_hands(player_cards, computer_cards, reveal_all=True)
-        sys.exit()
-
+        return
     # check if anyone busts on first deal
     if check_bust(player_total):
         print("\nBUSTED - You Lose\n")
         display_hands(player_cards, computer_cards, reveal_all=True)
-        sys.exit()
+        return
 
     if check_bust(computer_total):
         print("\nComputer went over 21 - YOU WIN\n")
         display_hands(player_cards, computer_cards, reveal_all=True)
-        sys.exit()
+        return
 
     # game loop while player has not finished
     while not game_over:
         display_hands(player_cards, computer_cards, reveal_all = False)
         choice = input("\nHit or Stand?: ").lower()
 
-        # if player hits draw a card and recalc total
         if choice == "hit":
             draw_card(player_cards)
             player_total = calculate_total(player_cards)
@@ -105,6 +103,7 @@ def blackjack():
                     print("\nComputer went over 21 - YOU WIN\n")
                     display_hands(player_cards, computer_cards, reveal_all=True)
                     game_over = True
+                    break
 
                 elif computer_total == 21:
                     print("\nYou Lose - Computer reached 21\n")
